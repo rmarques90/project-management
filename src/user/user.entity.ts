@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateCol
 import { Project } from "src/project/project.entity";
 import { UserRoles } from "src/utils/constants";
 import { Field, ID, ObjectType } from "@nestjs/graphql";
+import { Exclude } from 'class-transformer';
 
 @ObjectType()
 @Entity()
@@ -16,6 +17,7 @@ export class User {
     @Column()
     email: string;
 
+    @Exclude()
     @Column()
     password: string;
 

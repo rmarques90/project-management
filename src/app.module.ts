@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { ComplexityPlugin } from './utils/plugins/complexity.plugin';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [ConfigModule.forRoot(),
@@ -17,7 +18,8 @@ import { ComplexityPlugin } from './utils/plugins/complexity.plugin';
     }), 
     AppService,
     ProjectModule,
-    UserModule],
+    UserModule,
+    AuthModule],
   controllers: [AppController],
   providers: [AppService, ComplexityPlugin],
 })

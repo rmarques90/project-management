@@ -60,4 +60,8 @@ export class UserService {
         }
         return false;
     }
+
+    async findByEmail(email: string): Promise<User> {
+        return this.userRepository.findOne({email});
+    }
 }
