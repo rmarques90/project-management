@@ -22,7 +22,7 @@ export class ProjectResolver {
         return await this.projectService.findProjectById(id);
     }
 
-    @Mutation(() => Project)
+   /*  @Mutation(() => Project)
     async createProject(
         @Args('data') data: CreateProjectInput
     ): Promise<Project> {
@@ -35,7 +35,7 @@ export class ProjectResolver {
         @Args('data') data: UpdateProjectInput
     ): Promise<Project> {
         return await this.projectService.updateProject(id, data);
-    }
+    } */
 
 
 }

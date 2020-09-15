@@ -22,5 +22,6 @@ export class Project {
     updatedAt: Date;
 
     @ManyToMany(() => User, user => user.projects)
+    @Field(() => [User])
     users?: User[];
 }

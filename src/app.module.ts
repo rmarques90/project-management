@@ -7,12 +7,21 @@ import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
-import { ComplexityPlugin } from './utils/plugins/complexity.plugin';
 import { AuthModule } from './auth/auth.module';
+import { User } from './user/user.entity';
+import { Project } from './project/project.entity';
 
 @Module({
   imports: [ConfigModule.forRoot(),
-    TypeOrmModule.forRoot(),
+    TypeOrmModule.forRoot({
+    "type": "mysql",
+    "host": process.env.DATABASE_HOST,
+    "port": parseInt(process.env.DATABASE_PORT),
+    "username": process.env.DATABASE_USERNAME,
+    "password": process.env.DATABASE_PASSWORD,
+    "database": process.env.DATABASE_NAME,
+    "entities": [User, Project],
+    }),
     GraphQLModule.forRoot({
         context: ({ req }) => ({ req }),
         autoSchemaFile: join(process.cwd(), 'src/schema.gql')
@@ -20,8 +29,9 @@ import { AuthModule } from './auth/auth.module';
     AppService,
     ProjectModule,
     UserModule,
-    AuthModule],
+    AuthModule
+    ],
   controllers: [AppController],
-  providers: [AppService, ComplexityPlugin],
+  providers: [AppService],
 })
 export class AppModule {}
