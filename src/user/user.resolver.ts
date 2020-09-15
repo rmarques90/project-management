@@ -3,7 +3,11 @@ import { UpdateUserInput } from './dto/update-user.input';
 import { CreateUserInput } from './dto/create-user.input';
 import { User } from './user.entity';
 import { UserService } from './user.service';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/auth/guards/gql-auth.guard';
+import { CurrentUser } from 'src/utils/custom-decorators/current-user.decorator';
 
+@UseGuards(GqlAuthGuard)
 @Resolver()
 export class UserResolver {
     constructor(
@@ -12,7 +16,9 @@ export class UserResolver {
 
     @Query(() => [User])
     async users(
+        @CurrentUser() user: User
     ): Promise<User[]> {
+        console.log('user request: ', user);
         return await this.userService.findAllUsers();
     }
 
