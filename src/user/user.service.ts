@@ -53,7 +53,7 @@ export class UserService {
             throw new NotFoundException('user not found to remove');
         }
 
-        const deleted = await this.userRepository.delete(user.id);
+        const deleted = await this.userRepository.remove(user);
 
         if (deleted) {
             return true;

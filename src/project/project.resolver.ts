@@ -2,6 +2,7 @@ import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { ProjectService } from './project.service';
 import { Project } from './project.entity';
 import { CreateProjectInput } from './dto/create-project.input';
+import { UpdateProjectInput } from './dto/update-project.input';
 
 @Resolver()
 export class ProjectResolver {
@@ -26,6 +27,14 @@ export class ProjectResolver {
         @Args('data') data: CreateProjectInput
     ): Promise<Project> {
         return await this.projectService.createProject(data);
+    }
+
+    @Mutation(() => Project)
+    async updateProject(
+        @Args('id') id: string,
+        @Args('data') data: UpdateProjectInput
+    ): Promise<Project> {
+        return await this.projectService.updateProject(id, data);
     }
 
 

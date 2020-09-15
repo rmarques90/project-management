@@ -11,7 +11,8 @@ export class UserResolver {
     ) {}
 
     @Query(() => [User])
-    async users(): Promise<User[]> {
+    async users(
+    ): Promise<User[]> {
         return await this.userService.findAllUsers();
     }
 
