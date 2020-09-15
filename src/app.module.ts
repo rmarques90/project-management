@@ -2,17 +2,24 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { configService } from './db/config.service';
-import { UserModule } from './user/user.module';
-import { ProjectService } from './project/project.service';
 import { ProjectModule } from './project/project.module';
+import { UserModule } from './user/user.module';
+import { ConfigModule } from '@nestjs/config';
+import { GraphQLModule } from '@nestjs/graphql';
+import { join } from 'path';
+
 
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot(configService.getTypeOrmConfig()), 
-    UserModule, ProjectModule],
+  imports: [ConfigModule.forRoot(),
+    TypeOrmModule.forRoot(),
+    GraphQLModule.forRoot({
+        autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    }), 
+    AppService,
+    ProjectModule,
+    UserModule],
   controllers: [AppController],
-  providers: [AppService, ProjectService],
+  providers: [AppService],
 })
 export class AppModule {}

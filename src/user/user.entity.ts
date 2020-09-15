@@ -1,9 +1,13 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinColumn } from "typeorm";
 import { Project } from "src/project/project.entity";
+import { UserRoles } from "src/utils/constants";
+import { Field, ID, ObjectType } from "@nestjs/graphql";
 
+@ObjectType()
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
+    @Field(() => ID)
     id: number;
 
     @Column()
@@ -21,7 +25,10 @@ export class User {
     @UpdateDateColumn()
     updatedAt: Date;
 
-    @ManyToMany(type => Project, project => project.users)
+    @ManyToMany(() => Project, project => project.users)
     @JoinColumn()
     projects?: Project[];
+
+    @Column({type: 'enum', enum: UserRoles, default: UserRoles.USER})
+    role: string;
 }

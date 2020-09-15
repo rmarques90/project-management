@@ -1,0 +1,18 @@
+{
+    "type": "mysql",
+    "host": "192.168.50.67",
+    "port": 3306,
+    "username": "sa",
+    "password": "blueScreen666",
+    "database": "project",
+    "entities": [
+      "src/**/*.entity{.ts,.js}"
+    ],
+    "migrationsTableName": "migration",
+    "migrations": [
+      "src/db/migration/*{.ts,.js}"
+    ],
+    "cli": {
+      "migrationsDir": "./src/db/migration"
+    }
+  }
