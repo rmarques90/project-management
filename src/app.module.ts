@@ -10,6 +10,7 @@ import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { User } from './user/user.entity';
 import { Project } from './project/project.entity';
+import { ComplexityPlugin } from './utils/plugins/complexity.plugin';
 
 @Module({
   imports: [ConfigModule.forRoot(),
@@ -32,6 +33,6 @@ import { Project } from './project/project.entity';
     AuthModule
     ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ComplexityPlugin],
 })
 export class AppModule {}
