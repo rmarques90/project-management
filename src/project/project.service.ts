@@ -13,7 +13,7 @@ export class ProjectService {
     ) {}
 
     async findAll(): Promise<Project[]> {
-        return await this.projectRepository.find();
+        return await this.projectRepository.find({relations: ["users"]});
     }
 
     async findProjectById(id: string): Promise<Project> {
@@ -33,7 +33,8 @@ export class ProjectService {
         if (!projectSaved) {
             throw new InternalServerErrorException('Error saving new project');
         }
-        return projectSaved;
+
+        return await this.projectRepository.findOne(projectSaved.id, {relations: ["users"]});
     }
 
     async updateProject(id: string, data: UpdateProjectInput): Promise<Project> {
@@ -46,7 +47,7 @@ export class ProjectService {
         const projectUpdated = this.projectRepository.create({...project, ...data});
         await this.projectRepository.save(projectUpdated);
 
-        return projectUpdated;
+        return await this.projectRepository.findOne(projectUpdated.id, {relations: ["users"]});
     }
 
 

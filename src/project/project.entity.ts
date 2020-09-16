@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable } from "typeorm";
 import { User } from "src/user/user.entity";
 import { Field, ID, ObjectType } from "@nestjs/graphql";
 
@@ -21,7 +21,7 @@ export class Project {
     @UpdateDateColumn()
     updatedAt: Date;
 
-    @ManyToMany(() => User, user => user.projects)
-    @Field(() => [User])
+    @ManyToMany(() => User)
+    @JoinTable()
     users?: User[];
 }

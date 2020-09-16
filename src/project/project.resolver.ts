@@ -3,7 +3,9 @@ import { ProjectService } from './project.service';
 import { Project } from './project.entity';
 import { CreateProjectInput } from './dto/create-project.input';
 import { UpdateProjectInput } from './dto/update-project.input';
-
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/auth/guards/gql-auth.guard';
+@UseGuards(GqlAuthGuard)
 @Resolver()
 export class ProjectResolver {
     constructor(
@@ -22,7 +24,7 @@ export class ProjectResolver {
         return await this.projectService.findProjectById(id);
     }
 
-   /*  @Mutation(() => Project)
+    @Mutation(() => Project)
     async createProject(
         @Args('data') data: CreateProjectInput
     ): Promise<Project> {
@@ -35,7 +37,7 @@ export class ProjectResolver {
         @Args('data') data: UpdateProjectInput
     ): Promise<Project> {
         return await this.projectService.updateProject(id, data);
-    } */
+    }
 
 
 }

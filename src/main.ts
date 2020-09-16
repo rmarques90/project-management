@@ -13,5 +13,7 @@ async function bootstrap() {
   await app.listen(PORT);
 
   const { schema } = app.get(GraphQLSchemaHost);
+
+  console.log(schema);
 }
 bootstrap();

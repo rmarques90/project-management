@@ -1,5 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinColumn } from "typeorm";
-import { Project } from "src/project/project.entity";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { UserRoles } from "src/utils/constants";
 import { Field, ID, ObjectType } from "@nestjs/graphql";
 import { Exclude } from 'class-transformer';
@@ -26,10 +25,6 @@ export class User {
 
     @UpdateDateColumn()
     updatedAt: Date;
-
-    @ManyToMany(() => Project, project => project.users)
-    @JoinColumn()
-    projects?: Project[];
 
     @Column({type: 'enum', enum: UserRoles, default: UserRoles.USER})
     role: string;
