@@ -26,6 +26,9 @@
 
 ## Description
 
+Simple project to manage users and its projects using nestJS + TypeORM + JWT Auth + Graphql. It can be used as boilerplate to future projects.
+
+
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Installation
@@ -33,6 +36,10 @@
 ```bash
 $ npm install
 ```
+
+After installing, configure ormconfig.json with your properties then run `npm run typeorm:migration:run` to apply the changes to DB.
+
+
 
 ## Running the app
 
